@@ -32,6 +32,7 @@ function OssWrapper(options) {
 
   this._cdnBaseUrl = options.cdnBaseUrl;
   this._defaultHeaders = options.defaultHeaders;
+  this._trimKey = 
 }
 
 const proto = OssWrapper.prototype;
@@ -70,6 +71,6 @@ proto.remove = function* (key) {
   yield this.client.delete(trimKey(key));
 };
 
-function trimKey(key) {
-  return key ? key.replace(/^\//, '') : '';
+function trimKey(prefix, key) {
+  return prefix + key ? key.replace(/^\//, '') : '';
 }
