@@ -19,6 +19,7 @@ const urllib = require('urllib');
 const oss = require('../');
 const config = require('./config');
 const masterSlaveClusterConfig = require('./cluster_config');
+const prefixConfig = require('./prefix_config');
 
 const roundRobinClusterConfig = {};
 for (let key in masterSlaveClusterConfig) {
@@ -32,6 +33,11 @@ describe('test/index.test.js', function () {
       name: 'one region oss client',
       nfs: oss.create(config),
       prefix: '/oss-cnpm-example',
+    },
+    {
+      name: 'one region oss client with subdir',
+      nfs: oss.create(prefixConfig),
+      prefix: '/oss-cnpm-roundRobin-example',
     },
     {
       name: 'cluster:masterSlave oss client',

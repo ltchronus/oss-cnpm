@@ -32,6 +32,7 @@ const client = oss.create({
   endpoint: 'oss-cn-shenzhen.aliyuncs.com',
   bucket: 'your bucket',
   mode: 'public or private',
+  prefix: 'subdir in your bucket',
 });
 ```
 

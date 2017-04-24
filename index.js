@@ -22,6 +22,7 @@ exports.create = function (options) {
 function OssWrapper(options) {
   // If you want to use oss public mode, please set `options.mode = 'public'`
   this._mode = options.mode === 'public' ? 'public' : 'private';
+  this._prefix = options.prefix || '';
 
   if (options.cluster) {
     options.schedule = options.schedule || 'masterSlave';
@@ -32,13 +33,13 @@ function OssWrapper(options) {
 
   this._cdnBaseUrl = options.cdnBaseUrl;
   this._defaultHeaders = options.defaultHeaders;
-  this._trimKey = 
+  this._trimKey = trimKey(this._prefix);
 }
 
 const proto = OssWrapper.prototype;
 
 proto.upload = function* (filePath, options) {
-  const key = trimKey(options.key);
+  const key = this._trimKey(options.key);
   // https://github.com/ali-sdk/ali-oss#putname-file-options
   const result = yield this.client.put(key, filePath, {
     headers: this._defaultHeaders,
@@ -52,15 +53,15 @@ proto.upload = function* (filePath, options) {
 proto.uploadBuffer = proto.upload;
 
 proto.download = function* (key, filepath, options) {
-  yield this.client.get(trimKey(key), filepath, options);
+  yield this.client.get(this._trimKey(key), filepath, options);
 };
 
 proto.createDownloadStream = function* (key, options) {
-  return (yield this.client.getStream(trimKey(key), options)).stream;
+  return (yield this.client.getStream(this._trimKey(key), options)).stream;
 };
 
 proto.url = function (key) {
-  const name = trimKey(key);
+  const name = this._trimKey(key);
   if (this._cdnBaseUrl) {
     return this.client.getObjectUrl(name, this._cdnBaseUrl);
   }
@@ -68,7 +69,7 @@ proto.url = function (key) {
 };
 
 proto.remove = function* (key) {
-  yield this.client.delete(trimKey(key));
+  yield this.client.delete(this._trimKey(key));
 };
 
 function trimKey(prefix, key) {
