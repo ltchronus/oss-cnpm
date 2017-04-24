@@ -33,7 +33,7 @@ function OssWrapper(options) {
 
   this._cdnBaseUrl = options.cdnBaseUrl;
   this._defaultHeaders = options.defaultHeaders;
-  this._trimKey = trimKey(this._prefix);
+  this._trimKey = trimKey.bind(null, this._prefix);
 }
 
 const proto = OssWrapper.prototype;
@@ -73,5 +73,6 @@ proto.remove = function* (key) {
 };
 
 function trimKey(prefix, key) {
+  console.log(object);
   return prefix + key ? key.replace(/^\//, '') : '';
 }

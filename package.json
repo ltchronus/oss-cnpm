@@ -1,18 +1,18 @@
 {
-  "name": "oss-cnpm",
-  "version": "2.1.0",
+  "name": "oss-cnpm-prefix",
+  "version": "0.0.2",
   "description": "a oss api wraper for cnpmjs.org nfs",
   "keywords": [
     "oss",
     "cnpm"
   ],
-  "author": "dead_horse <dead_horse@qq.com>",
+  "author": "ltchronus <ltchronus@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "git://github.com/cnpm/oss-cnpm.git"
+    "url": "git@github.com:ltchronus/oss-cnpm.git"
   },
   "bugs": {
-    "url": "https://github.com/cnpm/oss-cnpm/issues"
+    "url": "https://github.com/ltchronus/oss-cnpm/issues"
   },
   "main": "index.js",
   "files": [
