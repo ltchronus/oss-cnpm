@@ -73,5 +73,5 @@ proto.remove = function* (key) {
 };
 
 function trimKey(prefix, key) {
-  return prefix + key ? key.replace(/^\//, '') : '';
+  return prefix + '/' + (key ? key.replace(/^\//, '') : '');
 }
