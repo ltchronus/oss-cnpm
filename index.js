@@ -73,6 +73,5 @@ proto.remove = function* (key) {
 };
 
 function trimKey(prefix, key) {
-  console.log(object);
   return prefix + key ? key.replace(/^\//, '') : '';
 }
