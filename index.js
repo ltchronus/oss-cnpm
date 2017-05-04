@@ -47,7 +47,7 @@ proto.upload = function* (filePath, options) {
   if (this._mode === 'public') {
     return { url: result.url };
   }
-  return { key: key };
+  return { key: trimKey.apply(null, '', key) };
 };
 
 proto.uploadBuffer = proto.upload;
